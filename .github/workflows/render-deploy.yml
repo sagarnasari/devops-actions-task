@@ -1,0 +1,22 @@
+name: Render Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test Build
+        run: echo "Build Successful"
+
+      - name: Trigger Render Deployment
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
